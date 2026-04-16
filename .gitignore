@@ -1,7 +1,4 @@
-### dotenv template
-.env
-
-!/.env
 .idea
 ./.idea
 config.ini
+/.env

@@ -1,0 +1,22 @@
+[DEFAULT]
+title = Syndicate
+version = 0.1
+
+
+[BotSettings]
+# Set Guild ID
+Guild_Id =
+# Set the channel which u want all event pings to be sent
+Event_Pings =
+# Set the role you wish to ping for all events
+Allow_Ping_Role =
+# Set welcome channel
+Welcome_Channel =
+
+
+[WebServerSettings]
+host = 0.0.0.0
+port = 8080
+
+[Database]
+DBName = syn.db
