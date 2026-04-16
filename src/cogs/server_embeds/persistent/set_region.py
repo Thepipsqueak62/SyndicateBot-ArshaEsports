@@ -2,9 +2,8 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 
-from cogs.moderation_commands.moderation_Commands import guild_id
 
-from shared_code.read_config import get_guild_id
+from shared_code.data_handlers.read_config import get_guild_id
 
 
 class ClassSelectMenu(discord.ui.View):

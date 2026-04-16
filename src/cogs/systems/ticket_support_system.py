@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import ui, app_commands
 import asyncio
 
-from shared_code.read_config import get_guild_id
+from shared_code.data_handlers.read_config import get_guild_id
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 ALLOWED_ROLES   = ["testrole2", "Helper"]          # Roles that can manage tickets
