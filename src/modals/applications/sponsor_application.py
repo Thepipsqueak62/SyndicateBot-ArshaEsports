@@ -44,7 +44,7 @@ class ModalTest(commands.Cog):
     async def on_ready(self):
         print("Slash Cogs Loaded")
 
-    @app_commands.command(name="modal", description="Ping Slash")
+    @app_commands.command(name="modals", description="Ping Slash")
     async def modal(self, interaction: discord.Interaction):
         await interaction.response.send_modal(MyModal())
 

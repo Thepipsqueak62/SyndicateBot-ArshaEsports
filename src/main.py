@@ -4,9 +4,9 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from src.cogs.server_interactions.persistent.SetEventNotification import ArcheRage_Event_Notification
+from src.cogs.server_embeds.persistent.set_tournament_notifications import ArcheRage_Event_Notification
 from cogs.PersistentEmbeds.SupportTicket import OpenTicketView
-from src.cogs.server_interactions.persistent.classMenu_Dropdown import ClassSelectMenu
+from src.cogs.server_embeds.persistent.set_region import ClassSelectMenu
 from shared_code.read_config import guild_id as get_guild_id  # Rename to avoid confusion
 from webserver.web_server import keep_alive  # Removed 'src.' from path
 
