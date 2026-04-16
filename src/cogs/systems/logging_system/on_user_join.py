@@ -2,8 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 import sqlite3
-from datetime import datetime, timedelta
-from configparser import ConfigParser
+from datetime import datetime
 from shared_code.read_config import get_guild_id
 
 class MemberLogger(commands.Cog):

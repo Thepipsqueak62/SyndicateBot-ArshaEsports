@@ -1,6 +1,3 @@
-import os
-from configparser import ConfigParser
-
 import discord
 from discord.ext import commands
 

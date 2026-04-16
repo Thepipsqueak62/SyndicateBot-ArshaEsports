@@ -1,7 +1,6 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-from configparser import ConfigParser
 
 from shared_code.read_config import get_guild_id
 # NEED TO REFACTOR THIS INTO SINGULAR FILES

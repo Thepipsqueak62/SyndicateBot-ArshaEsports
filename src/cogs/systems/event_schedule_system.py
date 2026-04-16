@@ -1,4 +1,3 @@
-import configparser
 import sqlite3
 
 import discord
@@ -7,7 +6,6 @@ from discord.ext import commands
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from discord import Embed, app_commands
-from configparser import ConfigParser
 from shared_code.read_config import guild_id as get_guild_id
 
 
