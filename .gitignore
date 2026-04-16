@@ -2,3 +2,6 @@
 .env
 
 !/.env
+.idea
+./.idea
+config.ini
