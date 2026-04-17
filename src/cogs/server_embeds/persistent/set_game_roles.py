@@ -2,12 +2,10 @@ import sqlite3
 import discord
 from discord.ext import commands
 from discord import ui
-from configparser import ConfigParser
-config = ConfigParser()
-config.read('config.ini')
 
-DatabaseFile = config['Database']['DBName']
+from shared_code.data_handlers.read_config import get_database_file
 
+DatabaseFile = get_database_file()
 
 # SQLite3 database connection
 conn = sqlite3.connect(DatabaseFile)
@@ -19,19 +17,19 @@ class shipsApplication(commands.Cog):
         self.bot = bot
 
         # Create separate tables if they don't exist
-        cursor.execute('''CREATE TABLE IF NOT EXISTS enoan_users (
+        cursor.execute('''CREATE TABLE IF NOT EXISTS apex_legends_users (
                             user_id INTEGER PRIMARY KEY
                         )''')
-        cursor.execute('''CREATE TABLE IF NOT EXISTS growling_yawl_users (
+        cursor.execute('''CREATE TABLE IF NOT EXISTS valorant_users (
                             user_id INTEGER PRIMARY KEY
                         )''')
-        cursor.execute('''CREATE TABLE IF NOT EXISTS lutesong_junk_users (
+        cursor.execute('''CREATE TABLE IF NOT EXISTS counter_strike_users (
                             user_id INTEGER PRIMARY KEY
                         )''')
-        cursor.execute('''CREATE TABLE IF NOT EXISTS eznan_cutter_users (
+        cursor.execute('''CREATE TABLE IF NOT EXISTS overwatch_users (
                             user_id INTEGER PRIMARY KEY
                         )''')
-        cursor.execute('''CREATE TABLE IF NOT EXISTS battle_clipper_users (
+        cursor.execute('''CREATE TABLE IF NOT EXISTS leauge_of_legends_users (
                                     user_id INTEGER PRIMARY KEY
                                 )''')
         conn.commit()
@@ -39,17 +37,17 @@ class shipsApplication(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)  # Permission Settings
     async def ships(self, ctx):
-        embed = discord.Embed(title="Ship Application",
-                              description="East Faction Ship Application")
+        embed = discord.Embed(title="Select Your Favorite Game",
+                              description="Some description")
         embed.set_image(url="https://github.com/Moonsight91/discrap/blob/main/enoan.png?raw=true")
-        embed.add_field(name=f" (ONLY) Select Ships That you Own", value="**Ship List**\n"
-                                                                           "- Enoan\n"
-                                                                           "- Growling Yawl\n"
-                                                                           "- Lutesong Junk\n"
-                                                                           "- Eznan Cutter\n"
-                                                                           "- Battle Clipper\n")
+        embed.add_field(name=f" Game Selection", value="**Game List**\n"
+                                                                           "- Apex legends\n"
+                                                                           "- CS2\n"
+                                                                           "- Valorant\n"
+                                                                           "- Leauge of Legends\n"
+                                                                           "- Overwatch\n")
         embed.set_thumbnail(url="https://na.archerage.to/static/images/logonew.png")
-        view = ShipButtons()
+        view = Buttons()
         message = await ctx.send(embed=embed, view=view)
         await ctx.message.delete()
 
@@ -58,7 +56,7 @@ class shipsApplication(commands.Cog):
         await ctx.send(str(error), ephemeral=True)
 
 
-class ShipButtons(discord.ui.View):
+class Buttons(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
@@ -80,25 +78,25 @@ class ShipButtons(discord.ui.View):
             await interaction.response.send_message(f"✅You have successfully applied for {button_label}.",
                                                     ephemeral=True)
 
-    @discord.ui.button(label="Enoan", custom_id="enoanBtn", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Apex Legends", custom_id="apexlegendsbtn", style=discord.ButtonStyle.blurple)
     async def enoan_button(self, interaction, button):
-        await self.handle_button_click(interaction, "Enoan", "enoan_users")
+        await self.handle_button_click(interaction, "Apex Legends", "apex_legends_users")
 
-    @discord.ui.button(label="Growling Yawl", custom_id="growlingYawlBtn", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Valorant", custom_id="valorantbtn", style=discord.ButtonStyle.blurple)
     async def growling_yawl_button(self, interaction, button):
-        await self.handle_button_click(interaction, "Growling Yawl", "growling_yawl_users")
+        await self.handle_button_click(interaction, "Valorant", "valorant_users")
 
-    @discord.ui.button(label="Lutesong Junk", custom_id="lutesonJunk", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="CS2", custom_id="cs2btn", style=discord.ButtonStyle.blurple)
     async def lutesong_junk_button(self, interaction, button):
-        await self.handle_button_click(interaction, "Lutesong Junk", "lutesong_junk_users")
+        await self.handle_button_click(interaction, "CS2", "counter_strike_users")
 
-    @discord.ui.button(label="Eznan Cutter", custom_id="eznanBtn", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Overwatch", custom_id="overwatchbtn", style=discord.ButtonStyle.blurple)
     async def eznan_cutter_button(self, interaction, button):
-        await self.handle_button_click(interaction, "Eznan Cutter", "eznan_cutter_users")
+        await self.handle_button_click(interaction, "Overwatch", "overwatch_users")
 
-    @discord.ui.button(label="Battle Clipper", custom_id="battle_clipper_Btn", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Leauge of Legends", custom_id="lolbtn", style=discord.ButtonStyle.blurple)
     async def battle_clipper_button(self, interaction, button):
-        await self.handle_button_click(interaction, "battle_clipper", "battle_clipper_users")
+        await self.handle_button_click(interaction, "Leauge of Legends", "leauge_of_legends_users")
 
 async def setup(client):
     await client.add_cog(shipsApplication(client))

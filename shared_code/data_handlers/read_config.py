@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Get the absolute path to config.ini based on THIS file's location
 CURRENT_FILE = Path(__file__)  # shared_code/read_config.py
-PROJECT_ROOT = CURRENT_FILE.parent.parent  # Go up to Syndicate_ArshaBot
+PROJECT_ROOT = CURRENT_FILE.parent.parent.parent  # Go up to Syndicate_ArshaBot
 CONFIG_PATH = PROJECT_ROOT / "config.ini"
 
 config = ConfigParser()
@@ -22,3 +22,9 @@ def get_welcome_channel():
 
 def get_allow_ping_role():
     return config["BotSettings"]["Allow_Ping_Role"]
+def get_web_host():
+    return config["WebServerSettings"]["host"]
+
+
+def get_database_file():
+    return config["Database"]["DBName"]

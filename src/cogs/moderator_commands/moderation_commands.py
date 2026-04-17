@@ -2,7 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from shared_code.read_config import get_guild_id
+from shared_code.data_handlers.read_config import get_guild_id
 # NEED TO REFACTOR THIS INTO SINGULAR FILES
 
 

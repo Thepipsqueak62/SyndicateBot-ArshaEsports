@@ -1,8 +1,9 @@
-from shared_code.read_config import get_guild_id
+
+from shared_code.data_handlers.read_config import get_web_host, get_allow_ping_role
 
 
 def test():
-    guild_id = get_guild_id()
+    guild_id = get_allow_ping_role()
     print(guild_id)
 
 

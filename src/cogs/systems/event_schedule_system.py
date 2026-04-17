@@ -6,7 +6,8 @@ from discord.ext import commands
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from discord import Embed, app_commands
-from shared_code.read_config import guild_id as get_guild_id
+
+from shared_code.data_handlers.read_config import get_guild_id
 
 
 class EventScheduler(commands.Cog):

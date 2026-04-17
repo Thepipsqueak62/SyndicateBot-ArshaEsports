@@ -3,7 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 import sqlite3
 from datetime import datetime
-from shared_code.read_config import get_guild_id
+from shared_code.data_handlers.read_config import get_guild_id
 
 class MemberLogger(commands.Cog):
     def __init__(self, client, db_file):

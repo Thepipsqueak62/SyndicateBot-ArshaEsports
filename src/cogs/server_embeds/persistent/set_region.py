@@ -11,12 +11,12 @@ class ClassSelectMenu(discord.ui.View):
         super().__init__(timeout=None)
 
     options = [
-        discord.SelectOption(label="testrole1", value="testrole1", description="Test role 1"),
-        discord.SelectOption(label="testrole2", value="testrole2", description="Test role 2"),
+        discord.SelectOption(label="NA", value="na", description="North American Region"),
+        discord.SelectOption(label="EU", value="eu", description="Europe Region"),
 
     ]
 
-    @discord.ui.select(placeholder="Select Class", options=options, custom_id="Select_Role")
+    @discord.ui.select(placeholder="Please select your region", options=options, custom_id="select_region")
     async def menu_callback(self, interaction: discord.Interaction, select):
         select.disabled = True
         user = interaction.user
@@ -25,8 +25,8 @@ class ClassSelectMenu(discord.ui.View):
 
         # Define your role IDs corresponding to the options
         role_ids = {
-            'testrole1': 1494420182708523191,  # Replace with your role ID
-            'testrole2': 1494420217370120432,
+            'na': 1494503660174970910,  # Replace with your role ID
+            'eu': 1494503688839106651,
 
         }
 
@@ -44,7 +44,7 @@ class ClassSelectMenu(discord.ui.View):
 
                 # Add the role to the user
                 await user.add_roles(role)
-                await interaction.response.send_message(content=f"Class role <@&{role.id}> added.", ephemeral=True)
+                await interaction.response.send_message(content=f"Region role <@&{role.id}> added.", ephemeral=True)
             else:
                 await interaction.response.send_message(content="Error: Role not found.", ephemeral=True)
         else:
@@ -59,14 +59,23 @@ class drop_Down(commands.Cog):
     async def on_ready(self):
         print("Select_Role_Dropdown")
 
-    @app_commands.command(name="setclass", description="Select your class of choice")
-    async def select_class(self, interaction: discord.Interaction):
+    @app_commands.command(name="regionselection", description="Select your class of choice")
+    @app_commands.checks.has_any_role("testrole2", "Helper")
+    async def select_region(self, interaction: discord.Interaction):
         view = ClassSelectMenu()
-        embed = discord.Embed(title="Class Selection", description="Use the dropdown menu to select your class.",
+        embed = discord.Embed(title="Region Selection", description="Use the dropdown menu to select your Region.",
                               color=0x00ff00)
         embed.add_field(name="Note",value="One Role Minimum")
         embed.set_image(url="https://i.ibb.co/zJrqKbf/sgfsdfgfdg.png")
         await interaction.response.send_message(embed=embed, view=view)
+
+    @select_region.error
+    async def select_region_error(self, interaction: discord.Interaction, error):
+        if isinstance(error, app_commands.MissingAnyRole):
+            await interaction.response.send_message(
+                "You don't have permission to use this command.",
+                ephemeral=True
+            )
 
 
 async def setup(client):

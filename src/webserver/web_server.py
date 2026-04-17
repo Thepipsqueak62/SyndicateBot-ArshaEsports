@@ -1,23 +1,18 @@
 from flask import Flask
 from threading import Thread
-from configparser import ConfigParser
 
-config = ConfigParser()
-config.read('config.ini')
-
-# Config.ini WebServerSettings
-host = config["WebServerSettings"]['host']
+from shared_code.data_handlers.read_config import get_web_host
 
 app = Flask('')
 
-
+host_ip = get_web_host()
 @app.route('/')
 def home():
     return "_ArcheRage Events Bot 🟢"
 
 
 def run():
-    app.run(host=host, port=8080)
+    app.run(host=host_ip, port=8080)
 
 
 def keep_alive():

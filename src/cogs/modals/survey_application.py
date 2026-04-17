@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands,ui
-from shared_code.read_config import get_guild_id
+from shared_code.data_handlers.read_config import get_guild_id
 
 
 class MyModal(ui.Modal, title="hello world"):
@@ -14,7 +14,7 @@ class MyModal(ui.Modal, title="hello world"):
                        custom_id="ageField",
                        style=discord.TextStyle.short)
     about = ui.TextInput(label="Tell me about Yourself",
-                         placeholder="I'm gay",
+                         placeholder="I'm mmee",
                          custom_id="aboutField",
                          style=discord.TextStyle.long)
 
